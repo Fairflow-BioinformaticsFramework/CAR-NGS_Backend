@@ -1,0 +1,14 @@
+(bala singlecell_enrichmentAnalysis (
+  (matrix_file string (desc "name (with format) of a CSV file containing the results of differential expression analysis"))
+  (species (enum ("hsapiens" "mmusculus" "dmelanogaster")) (desc "a character string indicating the species that is being analyzed"))
+  (parent_folder directory (desc "path of the directory containing the csv file"))
+  (source string (desc "a character sting indicating the source of enrichment analysis"))
+  (separator string (desc "separator used in the count table"))
+  (max_terms integer (desc "maximum number of enriched terms to display in the output plot"))
+  (run_docker
+    (image "repbioinfo/singlecelldownstream:latest")
+    (volumes (parent_folder "/scratch"))
+    (arguments "Rscript /home/enrichment_analysis.R" matrix_file species source separator max_terms))
+  (desc "Process the results of differential expression and performs pathway enrichment analysis")
+  (outputs (output directory "/output"))
+))

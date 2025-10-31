@@ -1,0 +1,13 @@
+(bala singlecell_alignIndex (
+  (input_folder directory (desc "path of the directory containing the fastq files"))
+  (genome_folder directory (desc "path of the directory containing the fasta and 
+   gtf files of the genome"))
+  (bamsave boolean (desc "variable indicating if the BAM files are to be saved")
+   (default TRUE))
+  (run_docker
+    (image "repbioinfo/carncellranger2:latest")
+    (volumes (input_folder "/scratch")(genome_folder "/genome"))
+    (arguments "/home/index_align.sh" bamsave))
+  (desc "Index and Alignment Script for single cell analysis")
+  (outputs (output directory "/output"))
+))

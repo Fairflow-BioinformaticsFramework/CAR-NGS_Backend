@@ -1,0 +1,20 @@
+(bala singlecell_clustering (
+  (matrix_file string (desc "name of the count matrix file, which can be both dense (.csv/.txt) or sparse (.mtx)"))
+  (parent_folder directory (desc "path of the directory containing the matrix file"))
+  (bootstrap_percentage number (desc "percentage of cells to remove in each bootstrap
+   iteration"))
+  (stability_threshold number (desc "minimum Jaccard Index value for a cluster to be
+   considered stable"))
+  (permutations integer (desc "number of bootstrap iterations to perform"))
+  (separator string (desc "separator used in the count table") (default "null"))
+  (genes_file string (desc "name of the genes name files necessary for the analysis of a sparse matrix (*genes.tsv)") (default "null"))
+  (barcodes_file string (desc "name of the barcodes file necessary for the analysis of a sparse matrix (*barcodes.tsv)") (default "null"))
+  (resolution number (desc "resolution parameter for Seurat clustering"))
+  (run_docker
+    (image "repbioinfo/singlecelldownstream:latest")
+    (volumes (parent_folder "/scratch"))
+    (arguments "Rscript /home/clustering.R" matrixfile_name bootstrap_percentage stability_threshold permutations separator genesfile_name barcodesfile_name resolution))
+  (desc "Clustering and Stability Analysis Script")
+  (outputs (output directory "/output"))
+))
+
