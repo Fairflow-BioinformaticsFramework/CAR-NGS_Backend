@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tool id="htgts" name="htgts">
+  <description> High-Throughput Genome-wide Translocation Sequencing Analysis</description>
+  <requirements></requirements>
+  <inputs>
+    <param type="data_collection" name="input_folder" value="&lt;nil&gt;">
+      <label>path of the directory containing all input data</label>
+    </param>
+    <param type="text" name="fastq1_name" value="&lt;nil&gt;">
+      <label>character string indicating the first input FASTQ file name</label>
+    </param>
+    <param type="text" name="fastq2_name" value="&lt;nil&gt;">
+      <label>character string indicating the second input FASTQ file name</label>
+    </param>
+    <param type="text" name="expInfo_name" value="&lt;nil&gt;">
+      <label>name of the libseqInfo.txt file</label>
+    </param>
+    <param type="text" name="expInfo2_name" value="&lt;nil&gt;">
+      <label>name of the libseqInfo2.txt file</label>
+    </param>
+    <param type="select" name="configType" value="HTGTS_mouse">
+      <option value="HTGTS_mouse">HTGTS_mouse</option>
+      <option value="HTGTS_human">HTGTS_human</option>
+      <option value="CELTICSseq">CELTICSseq</option>
+      <option value="polyA">polyA</option>
+      <label>configuration type, as defined in config_types.json</label>
+    </param>
+    <param type="text" name="assembly" value="&lt;nil&gt;">
+      <label>reference genome version (e.g., mm9)</label>
+    </param>
+  </inputs>
+  <outputs></outputs>
+</tool>
