@@ -1,0 +1,16 @@
+(bala atacSeq (
+  (desc "Function to perform Assay for Transposase-Accessible Chromatin with high-throughput sequencing analysis")
+  (input_directory directory (desc "Path to fastq files directory"))
+  (genome_directory directory (desc "Path to reference genome fasta files directory"))
+  (nThreads number 
+      (desc "Number of cores for parallelization"))
+  (run_docker
+      (image "repbioinfo/atacseq")
+      (volumes (input_directory "/scratch")(genome_directory "/genomes")
+          (results "/scratch/results"))
+      (arguments "/home/script.sh" nThreads))
+  (outputs
+      (results directory "/results"
+          (desc "Output directory containing analysis results")))
+)
+)

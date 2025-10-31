@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tool id="atacSeq" name="atacSeq">
+  <description>Function to perform Assay for Transposase-Accessible Chromatin with high-throughput sequencing analysis</description>
+  <requirements></requirements>
+  <inputs>
+    <param type="data_collection" name="input_directory" value="&lt;nil&gt;">
+      <label>Path to fastq files directory</label>
+    </param>
+    <param type="data_collection" name="genome_directory" value="&lt;nil&gt;">
+      <label>Path to reference genome fasta files directory</label>
+    </param>
+    <param type="float" name="nThreads" value="&lt;nil&gt;">
+      <label>Number of cores for parallelization</label>
+    </param>
+  </inputs>
+  <outputs></outputs>
+</tool>
