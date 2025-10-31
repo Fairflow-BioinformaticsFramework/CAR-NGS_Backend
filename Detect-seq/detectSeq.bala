@@ -1,0 +1,16 @@
+(bala detectSeq (
+  (input_folder directory (desc "path of the directory containing the fastq files"))
+  (genome_folder directory (desc "path of the directory containing the genome fasta file
+   and the index (if already obtained)"))
+  (output_folder directory (desc "path of the directory in which the outputs will be saved"))
+  (threshold integer (desc "threshold value for filtering"))
+  (adapt1 string (desc "first adapter sequence"))
+  (adapt2 string (desc "second adapter sequence"))
+  (run_docker
+    (image "repbioinfo/detectseq:latest")
+    (volumes (input_folder "/scratch/raw.fastq:ro")(genome_folder "/genome")
+    (output_folder "/scratch"))
+    (arguments "/home/detectSeq.sh" threshold adapt1 adapt2))
+  (desc "Executes a genome-wide assessment of off-target effects associated with cytosine base editors (CBEs)")
+  (outputs (output directory "/output"))
+))

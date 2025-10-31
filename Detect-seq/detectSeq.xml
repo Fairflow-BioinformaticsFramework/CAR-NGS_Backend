@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tool id="detectSeq" name="detectSeq">
+  <description>Executes a genome-wide assessment of off-target effects associated with cytosine base editors (CBEs)</description>
+  <requirements></requirements>
+  <inputs>
+    <param type="data_collection" name="input_folder" value="&lt;nil&gt;">
+      <label>path of the directory containing the fastq files</label>
+    </param>
+    <param type="data_collection" name="genome_folder" value="&lt;nil&gt;">
+      <label>path of the directory containing the genome fasta file&#xA;   and the index (if already obtained)</label>
+    </param>
+    <param type="data_collection" name="output_folder" value="&lt;nil&gt;">
+      <label>path of the directory in which the outputs will be saved</label>
+    </param>
+    <param type="integer" name="threshold" value="&lt;nil&gt;">
+      <label>threshold value for filtering</label>
+    </param>
+    <param type="text" name="adapt1" value="&lt;nil&gt;">
+      <label>first adapter sequence</label>
+    </param>
+    <param type="text" name="adapt2" value="&lt;nil&gt;">
+      <label>second adapter sequence</label>
+    </param>
+  </inputs>
+  <outputs></outputs>
+</tool>
