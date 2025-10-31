@@ -1,0 +1,12 @@
+(bala pca (
+  (matrix_file string (desc "name of the count matrix file obtained after the genome indexing"))
+  (metadata_file string (desc "name of the metadata file obtained after the genome indexing"))
+  (input_folder directory (desc "path of the directory containing the fastq files and
+   the csv files obtained from the indexing"))
+  (run_docker
+    (image "repbioinfo/rnaseqstar_v2:latest")
+    (volumes (input_folder "/scratch"))
+    (arguments "Rscript /home/pca.R" matrix_file metadata_file))
+  (desc "Performs Principal Component Analysis (PCA) on the gene count matrix")
+  (outputs (output directory "/output"))
+))

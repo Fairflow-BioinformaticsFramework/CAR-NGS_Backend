@@ -1,0 +1,10 @@
+(bala index_align (
+  (input_folder directory (desc "path of a directory containing the fastq files to be analyzed"))
+  (genome_folder directory (desc "path of a directory containing the fasta files of the genome"))
+  (run_docker
+    (image "repbioinfo/rnaseqstar_v2:lastest")
+    (volumes (input_folder "/scratch")(genome_folder "/genome"))
+    (arguments "/home/index_align.sh"))
+  (desc "Performs the alignment of RNA-Seq reads to the reference genome using STAR")
+  (outputs (output directory "/output"))
+))
