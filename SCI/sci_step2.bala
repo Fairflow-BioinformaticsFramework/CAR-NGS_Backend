@@ -1,0 +1,9 @@
+(bala SCI_2 (
+  (input_folder directory (desc "path of the directory output of the SCI_1function"))
+  (run_docker
+    (image "/repbioinfo/monocle:latest")
+    (volumes (input_folder "/data/scratch"))
+    (arguments "Rscript /home/endpipeline.R"))
+  (desc "Used in combination with SCI_1, from fastq files produces gene expression matrix and QC plots and statistics for SCI data")
+  (outputs (output directory "/output"))
+))
