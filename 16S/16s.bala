@@ -3,7 +3,7 @@
   (input_directory directory (desc "Path to input directory containing fastq files"))
   (run_docker
       (image "repbioinfo/qiime2023")
-      (volumes (input_directory "/scratch")(aligned_results "/scratch/aligned_results"))
+      (volumes (input_directory "/scratch"))
       (arguments "/home/qiime_full.sh"))
   (outputs
       (aligned_results directory "/aligned_results"
