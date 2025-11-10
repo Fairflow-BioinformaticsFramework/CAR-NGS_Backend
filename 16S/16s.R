@@ -30,14 +30,14 @@ sixteenS <- function(input_directory) {
   input_directory_filename <- basename(input_directory)
   
   # Main volume mount point
-  main_mount_dir <- input_directory_dir
+  main_mount_dir <- input_directory
   
   # Execute Docker container with error handling
   tryCatch({
     result <- rrundocker::run_in_docker(
       image_name = "repbioinfo/qiime2023",
       volumes = list(
-        c(input_directory_dir, "/scratch")
+        c(input_directory, "/scratch")
       ),
       additional_arguments = c(
         "/home/qiime_full.sh"
