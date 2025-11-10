@@ -61,13 +61,13 @@ nThreads) {
     result <- rrundocker::run_in_docker(
       image_name = "repbioinfo/atacseq",
       volumes = list(
-        c(input_directory_dir, "/scratch"),
-        c(genome_directory_dir, "/genomes"),
-        c("results", "/scratch/results"),
+        c(input_directory, "/scratch"),
+        c(genome_directory, "/genomes"),
+        c("results", "/scratch/results")
       ),
       additional_arguments = c(
         "/home/script.sh",
-        as.character(nThreads),
+        as.character(nThreads)
       )
     )
     
