@@ -1,7 +1,7 @@
 (bala DESeq2 (
   (matrix_file string (desc "name of the count matrix file obtained after the genome indexing"))
   (metadata_file string (desc "name of the metadata file obtained after the genome indexing"))
-  (species (enum ("hsapiens" "mmusculus" "dmelanogaster")) (desc "name of the organism subject of the analysis"))
+  (species (enum ("Homosapiens" "Musmusculus" "Drosophilamelanogaster")) (desc "name of the organism subject of the analysis"))
   (reference_group string (desc "name of the reference group inside the metadata"))
   (input_folder directory (desc "path of the directory containing the fastq files and
    the csv files obtained from the indexing"))
