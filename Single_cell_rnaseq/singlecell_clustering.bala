@@ -6,14 +6,14 @@
   (stability_threshold number (desc "minimum Jaccard Index value for a cluster to be
    considered stable"))
   (permutations integer (desc "number of bootstrap iterations to perform"))
-  (separator string (desc "separator used in the count table") (default "null"))
-  (genes_file string (desc "name of the genes name files necessary for the analysis of a sparse matrix (*genes.tsv)") (default "null"))
-  (barcodes_file string (desc "name of the barcodes file necessary for the analysis of a sparse matrix (*barcodes.tsv)") (default "null"))
+  (separator string (desc "separator used in the count table for dense matrix analysis, is "null" for sparse matrix analysis"))
+  (genes_file string (desc "name of the genes name files necessary for the analysis of a sparse matrix (*genes.tsv), "null" for dense matrix analysis"))
+  (barcodes_file string (desc "name of the barcodes file necessary for the analysis of a sparse matrix (*barcodes.tsv), "null" for dense matrix analysis"))
   (resolution number (desc "resolution parameter for Seurat clustering"))
   (run_docker
     (image "repbioinfo/singlecelldownstream:latest")
     (volumes (parent_folder "/scratch"))
-    (arguments "Rscript /home/clustering.R" matrixfile_name bootstrap_percentage stability_threshold permutations separator genesfile_name barcodesfile_name resolution))
+    (arguments "Rscript /home/clustering.R" matrix_file bootstrap_percentage stability_threshold permutations separator genes_file barcodes_file resolution))
   (desc "Clustering and Stability Analysis Script")
   (outputs (output directory "/output"))
 ))
