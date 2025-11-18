@@ -5,9 +5,9 @@
   (mitoMax integer (desc "end range for mitochondrial percentage, cells within the range are retained"))
   (riboMin integer (desc "start range for ribosomal percentage, cells within the range are retained"))
   (riboMax integer (desc "end range for ribosomal percentage, cells within the range are retained"))
-  (separator string (desc "separator used in the count table") (default "NULL"))
-  (genes_file string (desc "name of the genes name files necessary for the analysis of a sparse matrix (*genes.tsv)") (default "NULL"))
-  (barcodes_file string (desc "name of the barcodes file necessary for the analysis of a sparse matrix (*barcodes.tsv)") (default "NULL"))
+    (separator string (desc "separator used in the count table for dense matrix analysis, is "null" for sparse matrix analysis"))
+  (genes_file string (desc "name of the genes name files necessary for the analysis of a sparse matrix (*genes.tsv), "null" for dense matrix analysis"))
+  (barcodes_file string (desc "name of the barcodes file necessary for the analysis of a sparse matrix (*barcodes.tsv), "null" for dense matrix analysis"))
   (run_docker
     (image "repbioinfo/singlecelldownstream:latest")
     (volumes (parent_folder "/scratch"))
