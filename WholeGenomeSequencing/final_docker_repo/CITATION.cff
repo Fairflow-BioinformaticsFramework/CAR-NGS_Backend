@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "If you use this pipeline, please cite it."
+title: "Refined HackMD WGS GATK Pipeline"
+version: "0.1.0"
+date-released: "2026-06-04"
+authors:
+  - family-names: "YourSurname"
+    given-names: "YourName"
+repository-code: "https://github.com/yourusername/refined-hackmd-wgs-pipeline"
+license: "MIT"
