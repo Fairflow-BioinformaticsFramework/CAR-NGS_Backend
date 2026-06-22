@@ -1,0 +1,42 @@
+# ============================================================
+# Dockerfile
+# Reproducible Docker environment for generalized WGS/GATK pipeline
+# ============================================================
+
+FROM continuumio/miniconda3:24.5.0-0
+
+LABEL description="Docker environment for generalized WGS preprocessing and GATK variant calling pipeline"
+
+SHELL ["/bin/bash", "-c"]
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    wget \
+    curl \
+    unzip \
+    gzip \
+    bzip2 \
+    ca-certificates \
+    procps \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN conda create -y -n wgs_env -c conda-forge -c bioconda \
+    bwa \
+    samtools \
+    gatk4 \
+    fastqc \
+    multiqc \
+    trim-galore \
+    sra-tools \
+    && conda clean -afy
+
+ENV PATH="/opt/conda/envs/wgs_env/bin:${PATH}"
+
+WORKDIR /pipeline
+
+COPY wgs_gatk_pipeline.sh /pipeline/wgs_gatk_pipeline.sh
+COPY config.sh /pipeline/config.sh
+
+RUN chmod +x /pipeline/wgs_gatk_pipeline.sh
+
+CMD ["bash", "/pipeline/wgs_gatk_pipeline.sh", "/pipeline/config.sh"]
