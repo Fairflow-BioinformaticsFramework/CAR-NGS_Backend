@@ -1,14 +1,34 @@
-(bala DESeq2 (
-  (matrix_file string (desc "name of the count matrix file obtained after the genome indexing"))
-  (metadata_file string (desc "name of the metadata file obtained after the genome indexing"))
-  (species (enum ("Homosapiens" "Musmusculus" "Drosophilamelanogaster")) (desc "name of the organism subject of the analysis"))
-  (reference_group string (desc "name of the reference group inside the metadata"))
-  (input_folder directory (desc "path of the directory containing the fastq files and
-   the csv files obtained from the indexing"))
-  (run_docker
-    (image "repbioinfo/rnaseqstar_v2:latest")
-    (volumes (input_folder "/scratch"))
-    (arguments "Rscript /home/Deseq2.R" matrix_file metadata_file reference_group species))
-  (desc "Performs differential expression analysis")
-  (outputs (output directory "/output"))
-))
+[research]
+description=Performs differential expression analysis
+name=deseq2
+#
+[run]
+command=docker run --rm 
+script= Rscript /home/Deseq2.R
+image= repbioinfo/rnaseqstar_v2
+usage= <matrix_file> <metadata_file> <reference_group> <species>
+#
+[directory]
+name=workDir
+description=Path to working directory containing the fastq files and csv files obtained from indexing
+flag=io
+mount=/scratch
+#
+[file]
+name=matrix_file
+flag=cp
+description=Path to the count matrix file obtained after the genome indexing
+#
+[file]
+name=metadata_file
+flag=cp
+description=Path to the metadata file obtained after the genome indexing
+#
+[parameter]
+name=reference_group
+description=Name of the reference group inside the metadata
+#
+[parameter]
+name=species
+values=Homosapiens,Musmusculus,Drosophilamelanogaster
+description=Name of the organism subject of the analysis

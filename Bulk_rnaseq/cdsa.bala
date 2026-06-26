@@ -1,14 +1,38 @@
-(bala cdsa (
-  (matrix_file string (desc "name of the count matrix file obtained after the genome indexing"))
-  (metadata_file string (desc "name of the metadata file obtained after the genome indexing"))
-  (species (enum ("Homosapiens" "Musmusculus" "Drosophilamelanogaster")) (desc "name of the organism subject of the analysis"))
-  (reference_group string (desc "name of the reference group inside the metadata"))
-  (input_folder directory (desc "path of the directory containing the fastq files and the csv files obtained 
-   from the indexing"))
-  (run_docker
-    (image "repbioinfo/rnaseqstar_v2:latest")
-    (volumes (input_folder "/scratch"))
-    (arguments "Rscript /home/CompleteDownStreamAnalysis.R" matrix_file metadata_file reference_group species))
-  (desc "Executes the complete downstream bulk RNA-Seq analysis pipeline")
-  (outputs (output directory "/output"))
-))
+[research]
+description=Executes the complete downstream bulk RNA-Seq analysis pipeline
+name=cdsa
+#
+[run]
+command=docker run --rm 
+script= Rscript /home/CompleteDownStreamAnalysis.R
+image= repbioinfo/rnaseqstar_v2
+usage= <matrix_name> <metadata_name> <reference_group> <species>
+#
+[directory]
+name=workDir
+description=Path to working directory containing scratch folder
+flag=io
+mount=/workDir
+#
+[directory]
+name=scratch
+description=Path to scratch folder containing fastq files to be analyzed
+flag=io
+mount=/scratch
+#
+[parameter]
+name=matrix_name
+description=Name of the count matrix file obtained after the genome indexing
+#
+[parameter]
+name=metadata_name
+description=Name of the metadata file obtained after the genome indexing
+#
+[parameter]
+name=reference_group
+description=Name of the reference group inside the metadata
+#
+[parameter]
+name=species
+values=Homosapiens,Musmusculus,Drosophilamelanogaster
+description=Name of the organism subject of the analysis

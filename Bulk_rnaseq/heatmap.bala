@@ -1,12 +1,25 @@
-(bala heatmap (
-  (matrix_file string (desc "name of the count matrix file obtained after the genome indexing"))
-  (metadata_file string (desc "name of the metadata file obtained after the genome indexing"))
-  (input_folder directory (desc "path of the directory containing the fastq files and
-   the csv files obtained from the indexing"))
-  (run_docker
-    (image "repbioinfo/rnaseqstar_v2:latest")
-    (volumes (input_folder "/scratch"))
-    (arguments "Rscript /home/heatmap.R" matrix_file metadata_file))
-  (desc "Generates heatmaps based on the filtered gene count matrix")
-  (outputs (output directory "/output"))
-))
+[research]
+description=Generates heatmaps based on a gene count matrix
+name=heatmap
+#
+[run]
+command=docker run --rm 
+script= Rscript /home/heatmap.R
+image= repbioinfo/rnaseqstar_v2
+usage= <matrix_file> <metadata_file>
+#
+[directory]
+name=workDir
+description=Path to working directory containing the fastq files and csv files obtained from indexing
+flag=io
+mount=/scratch
+#
+[file]
+name=matrix_file
+flag=cp
+description=Path to the count matrix file obtained after the genome indexing
+#
+[file]
+name=metadata_file
+flag=cp
+description=Path to the metadata file obtained after the genome indexing
