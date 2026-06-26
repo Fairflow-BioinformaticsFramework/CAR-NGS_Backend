@@ -1,12 +1,20 @@
-(bala sixteenS (
-  (desc "Pipeline for the analysis of 16S rRNA gene sequencing data")
-  (input_directory directory (desc "Path to input directory containing fastq files"))
-  (run_docker
-      (image "repbioinfo/qiime2023")
-      (volumes (input_directory "/scratch"))
-      (arguments "/home/qiime_full.sh"))
-  (outputs
-      (aligned_results directory "/aligned_results"
-          (desc "Output directory containing analysis results")))
-)
-)
+[research]
+description=Pipeline for the analysis of 16S rRNA gene sequencing data
+name=16S
+#
+[run]
+command=docker run --rm 
+script= /home/qiime_full.sh
+image= repbioinfo/qiime2023 
+#
+[directory]
+name=workDir
+description=Path to working directory containing scratch folder
+flag=io
+mount=/workDir
+#
+[directory]
+name=scratch
+description=Path to scratch folder containing fastq files
+flag=io
+mount=/scratch
