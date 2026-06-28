@@ -1,0 +1,42 @@
+[research]
+description=Process the results of differential expression and performs pathway enrichment analysis
+name=singlecell_enrichmentanalysis
+#
+[run]
+command=docker run --rm 
+script= Rscript /home/enrichment_analysis.R
+image= repbioinfo/singlecelldownstream
+usage= <matrix_file> <species> <source> <separator> <max_terms>
+#
+[directory]
+name=workDir
+description=Path to working directory containing scratch folder
+flag=io
+mount=/workDir
+#
+[directory]
+name=scratch
+description=Path to scratch folder containing the files to be analyzed
+flag=io
+mount=/scratch
+#
+[parameter]
+name=matrix_file
+description=name of the count matrix file containing the results of differential expression analysis
+#
+[parameter]
+name=species
+values= hsapiens, mmusculus, dmelanogaster
+description=a character string indicating the species that is being analyzed
+#
+[parameter]
+name=source
+description=a character sting indicating the source of enrichment analysis
+#
+[parameter]
+name=separator
+description=separator used in the count table
+#
+[parameter]
+name=max_terms
+description=maximum number of enriched terms to display in the output plot
