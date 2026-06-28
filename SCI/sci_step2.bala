@@ -1,9 +1,20 @@
-(bala SCI_2 (
-  (input_folder directory (desc "path of the directory output of the SCI_1function"))
-  (run_docker
-    (image "/repbioinfo/monocle:latest")
-    (volumes (input_folder "/data/scratch"))
-    (arguments "Rscript /home/endpipeline.R"))
-  (desc "Used in combination with SCI_1, from fastq files produces gene expression matrix and QC plots and statistics for SCI data")
-  (outputs (output directory "/output"))
-))
+[research]
+description=Used in combination with SCI_1, from fastq files produces gene expression matrix and QC plots and statistics for SCI data
+name=sci_step2
+#
+[run]
+command=docker run --rm 
+script= Rscript /home/endpipeline.R
+image= repbioinfo/monocle
+#
+[directory]
+name=workDir
+description=Path to working directory containing scratch folder
+flag=io
+mount=/workDir
+#
+[directory]
+name=scratch
+description=path of the directory output of the sci_step1 function
+flag=io
+mount=/data/scratch

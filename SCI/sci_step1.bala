@@ -1,11 +1,29 @@
-(bala SCI_1 (
-  (input_folder directory (desc "path of the directory containing the input file"))
-  (sample_name string (desc "a character string indicating the name of the experiment"))
-  (UMI_cutoff integer (desc "minimum number of UMI per cell to consider the cell valid"))
-  (run_docker
-    (image "/repbioinfo/sci_tomatrix_genome:latest")
-    (volumes (input_folder "/data/scratch"))
-    (arguments "/home/tomatrix.sh" sample_name UMI_cutoff))
-  (desc "Used in combination with SCI_2, from fastq files produces gene expression matrix and QC plots and statistics for SCI data")
-  (outputs (output directory "/output"))
-))
+[research]
+description=Used in combination with SCI_2, from fastq files produces gene expression matrix and QC plots and statistics for SCI data
+name=sci_step1
+#
+[run]
+command=docker run --rm 
+script= /home/tomatrix.sh
+image= repbioinfo/sci_tomatrix_genome
+usage= <sample_name> <UMI_cutoff>
+#
+[directory]
+name=workDir
+description=Path to working directory containing scratch folder
+flag=io
+mount=/workDir
+#
+[directory]
+name=scratch
+description=Path to scratch folder containing the files to be analyzed
+flag=io
+mount=/data/scratch
+#
+[parameter]
+name=sample_name
+description=a character string indicating the name of the experiment
+#
+[parameter]
+name=UMI_cutoff
+description=minimum number of UMI per cell to consider the cell valid
