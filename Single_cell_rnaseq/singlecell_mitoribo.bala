@@ -1,0 +1,53 @@
+[research]
+description=Filtering cells based on their mitochondrial and ribosomal gene content, providing quality control in single-cell RNA-seq experiments
+name=singlecell_mitoribo
+#
+[run]
+command=docker run --rm 
+script= Rscript /home/mitoRiboFilter.R
+image= repbioinfo/singlecelldownstream
+usage= <matrix_file> <mitoMin> <mitoMax> <riboMin> <riboMax> <separator> <genes_file> <barcodes_file>
+#
+[directory]
+name=workDir
+description=Path to working directory containing scratch folder
+flag=io
+mount=/workDir
+#
+[directory]
+name=scratch
+description=Path to scratch folder containing the files to be analyzed
+flag=io
+mount=/scratch
+#
+[parameter]
+name=matrix_file
+description=name of the count matrix file, which can be both dense (.csv/.txt) or sparse (.mtx)
+#
+[parameter]
+name=mitoMin
+description=start range for mitochondrial percentage, cells within the range are retained
+#
+[parameter]
+name=mitoMax
+description=end range for mitochondrial percentage, cells within the range are retained
+#
+[parameter]
+name=riboMin
+description=start range for ribosomal percentage, cells within the range are retained
+#
+[parameter]
+name=riboMax
+description=end range for ribosomal percentage, cells within the range are retained
+#
+[parameter]
+name=separator
+description=separator used in the count table for dense matrix analysis, is "NULL" for sparse matrix analysis
+#
+[parameter]
+name=genes_file
+description=name of the genes name files necessary for the analysis of a sparse matrix (*genes.tsv), "NULL" for dense matrix analysis
+#
+[parameter]
+name=barcodes_file
+description=name of the barcodes file necessary for the analysis of a sparse matrix (*barcodes.tsv), "NULL" for dense matrix analysis

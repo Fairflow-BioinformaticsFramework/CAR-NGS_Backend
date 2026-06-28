@@ -1,0 +1,32 @@
+[research]
+description=Index and Alignment Script for single cell analysis
+name=singlecell_alignindex
+#
+[run]
+command=docker run --rm 
+script= /home/index_align.sh
+image= repbioinfo/carncellranger2
+usage= <bamsave>
+#
+[directory]
+name=workDir
+description=Path to working directory containing scratch folder
+flag=io
+mount=/workDir
+#
+[directory]
+name=genome
+description=Path to a directory containing the fasta files of the genome
+flag=io
+mount=/genome
+#
+[directory]
+name=scratch
+description=Path to scratch folder containing fastq files to be analyzed
+flag=io
+mount=/scratch
+#
+[parameter]
+name=bamsave
+values=true, false
+description=variable indicating if the BAM files are to be saved

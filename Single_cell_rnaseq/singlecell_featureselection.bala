@@ -1,12 +1,12 @@
 [research]
-description=Clustering and Stability Analysis Script for single cell analysis
-name=singlecell_clustering
+description=Feature selection scipt to identify differentially expressed (DE) genes in single cell analysis
+name=singlecell_featureselection
 #
 [run]
 command=docker run --rm 
-script= Rscript /home/clustering.R
+script= Rscript /home/featureSelection.R
 image= repbioinfo/singlecelldownstream
-usage= <matrix_file> <bootstrap_percentage> <stability_threshold> <permutations> <separator> <genes_file> <barcodes_file> <resolution>
+usage= <matrix_file> <clustering_file> <threshold> <log2fc> <pvalue> <separator> <genes_file> <barcodes_file> <heatmap>
 #
 [directory]
 name=workDir
@@ -25,16 +25,20 @@ name=matrix_file
 description=name of the count matrix file, which can be both dense (.csv/.txt) or sparse (.mtx)
 #
 [parameter]
-name=bootstrap_percentage
-description=percentage of cells to remove in each bootstrap iteration
+name=clustering_file
+description=name of the CSV file containing the clustering results
 #
 [parameter]
-name=stability_threshold
-description=minimum Jaccard Index value for a cluster to be considered stable
+name=threshold
+description=the stability threshold for filtering cells based on their stability
 #
 [parameter]
-name=permutations
-description=number of bootstrap iterations to perform
+name=log2fc
+description=the log2 fold change threshold for identifying DE genes
+#
+[parameter]
+name=pvalue
+description=the p-value threshold for identifying DE genes
 #
 [parameter]
 name=separator
@@ -49,5 +53,6 @@ name=barcodes_file
 description=name of the barcodes file necessary for the analysis of a sparse matrix (*barcodes.tsv), "NULL" for dense matrix analysis
 #
 [parameter]
-name=resolution
-description=resolution parameter for Seurat clustering
+name=heatmap
+values= TRUE, FALSE
+description=option to generate an heatmap
