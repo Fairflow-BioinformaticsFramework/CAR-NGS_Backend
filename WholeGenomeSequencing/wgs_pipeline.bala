@@ -1,0 +1,32 @@
+[research]
+description=Script to launch the WGS/GATK pipeline inside the Docker container
+name=wgs_pipeline
+#
+[run]
+command=docker run --rm 
+script= bash /pipeline/wgs_gatk_pipeline.sh
+image= generalized-wgs-gatk-pipeline
+usage= /config/<config_file>
+#
+[directory]
+name=workDir
+description=Path to working directory containing scratch folder
+flag=io
+mount=/workDir
+#
+[directory]
+name=projectDir
+description=Path to local project folder
+flag=io
+mount=/data
+#
+[directory]
+name=configDir
+description=Path to directory containing config_file
+flag=io
+mount=/config
+#
+[parameter]
+name=config_file
+value=config.sh
+description=name of the file for a reproducible WGS short-variant discovery pipeline based on BWA, SAMtools and GATK
