@@ -1,0 +1,51 @@
+[research]
+description=analizzare dati di sequenziamento e mappare le traslocazioni genomiche o i siti di rottura del DNA su larga scala
+name=HTGTS_Full
+#
+[run]
+command=docker run --rm 
+script= /Algorithm/HTGTS_Full.sh  		
+image= repbioinfo/htgts_pipeline_lts_v16:latest  
+usage= -fastq1 <fastq1> -fastq2 <fastq2> -expInfo <expInfo> -expInfo2 <expInfo2> -outDir <outDir> -configType <configType> -assembly <assembly>
+#
+[file]
+name=fastq1
+flag=cp
+description=the first input FASTQ file name
+#
+[file]
+name=fastq2
+flag=cp
+description=the second input FASTQ file name
+#
+[file]
+name=expInfo
+flag=ro
+description=name of the libseqInfo.txt file
+#
+[file]
+name=expInfo2
+flag=nc
+description=name of the libseqInfo2.txt file
+#
+[directory]
+name=workDir
+description=percorso cartella di lavoro
+flag=io
+mount=/workDir
+#
+[directory]
+name=outDir
+description=percorso cartella di output 
+mount=/outDir
+flag=out
+#
+[parameter]
+name=configType
+values=HTGTS_human,HTGTS_mouse,CELTICSseq,polyA
+description= tipo di cellule
+#
+[parameter]
+name=assembly
+values= hg38,mm9,mm10,custom
+description= reference genome version
