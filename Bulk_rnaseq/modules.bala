@@ -1,0 +1,42 @@
+[research]
+description=runs an RNA-seq data processing pipeline inside a Docker container. It analyzes a gene expression count matrix and associated metadata to identify gene modules
+name=modules
+#
+[run]
+command=docker run --rm 
+script= Rscript /home/modules.R
+image= repbioinfo/rnaseqbulkdownstreamunbias
+usage= <organism> <matrix_file> <metadata_file> <matrix_sep> <meta_sep>
+#
+[directory]
+name=workDir
+description=Path to working directory containing scratch folder
+flag=io
+mount=/workDir
+#
+[directory]
+name=scratch
+description=path of the directory containing the input files
+flag=io
+mount=/scratch
+#
+[parameter]
+name=organism
+values=Homosapiens, Musmusculus, Drosophilamelanogaster
+description=a character string specifying the organism
+#
+[parameter]
+name=matrix_file
+description=name (with format) of the count matrix fil
+#
+[parameter]
+name=metadata_file
+description=name (with format) of the metadata file
+#
+[parameter]
+name=matrix_sep
+description=separator used in the count matrix file
+#
+[parameter]
+name=meta_sep
+description=separator used in the metadata file
